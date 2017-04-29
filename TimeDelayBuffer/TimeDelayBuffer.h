@@ -23,11 +23,9 @@ public:
 	~DelayedBuffer();
 	void addData(DelayedData newData);
 	int getData(int currentTime);
-
-
+	
 	std::list <DelayedData> buf;
 	DelayedData lastOutput;
-	int latestDataNum;
 };
 
 #endif//_TIMEDELAYBUFFER_H_

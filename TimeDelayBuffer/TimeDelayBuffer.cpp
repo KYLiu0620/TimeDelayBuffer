@@ -22,7 +22,6 @@ DelayedData::~DelayedData()
 DelayedBuffer::DelayedBuffer()
 {
 	lastOutput = DelayedData(0 ,0 ,0);
-	latestDataNum = 0;
 }
 
 DelayedBuffer::~DelayedBuffer()
@@ -78,10 +77,9 @@ int DelayedBuffer::getData(int currentTime)
 			else
 			{
 				noDataArrived = false;
-				if (itr->number > latestDataNum/*this condition might be unnecessary*/ && itr->number > temp.number)	//multiple data arrived. choose latest one
+				if (itr->number > temp.number)	//multiple data arrived. choose latest one
 				{
 					temp = *itr;
-					latestDataNum = temp.number;
 				}
 
 				itr = buf.erase(itr);	//erase and shift itr to next one
@@ -94,6 +92,5 @@ int DelayedBuffer::getData(int currentTime)
 	}
 
 	lastOutput = temp;
-	latestDataNum = temp.number;
 	return temp.data;
 }	//getData
